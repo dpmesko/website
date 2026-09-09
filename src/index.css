@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    /* Safe here because this is a single page -- anchor links are the only
+       navigation, and they should glide. */
+    scroll-behavior: smooth;
+    background-color: #14110e;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Display type is set very large and very tight; these two make that hold
+     together instead of looking like stretched body copy. */
+  .font-display {
+    font-feature-settings: 'ss01' 1;
+    font-variant-ligatures: common-ligatures;
+  }
+
+  :focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
