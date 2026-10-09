@@ -39,6 +39,9 @@ export function VideoEmbed({
           'playsinline=1',
           // Required before the player will accept postMessage commands.
           'enablejsapi=1',
+          // Legacy quality hint. YouTube stopped honouring it years ago but it
+          // costs nothing; the real attempt is setPlaybackQuality below.
+          'vq=hd1080',
           start ? `start=${start}` : '',
         ]
           .filter(Boolean)
@@ -57,26 +60,34 @@ export function VideoEmbed({
         : `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`
 
   /**
-   * Videos with auto-generated caption tracks turn subtitles on by themselves,
-   * and no URL parameter reliably switches them back off. The iframe API does,
-   * via postMessage -- which needs no extra script, only enablejsapi=1 above.
+   * Two things the embed will not do on its own, both driven over the iframe
+   * API's postMessage channel, which needs no extra script -- only
+   * enablejsapi=1 above.
    *
-   * The player is not necessarily ready the moment the document fires load, so
-   * the command is repeated a few times and then given up on. Failing to land
-   * costs nothing worse than the captions staying visible.
+   * 1. Captions. Videos with auto-generated tracks switch subtitles on by
+   *    themselves and no URL parameter reliably turns them back off.
+   * 2. Quality. YouTube's adaptive streaming picks a resolution from bandwidth
+   *    and player size, and setPlaybackQuality is advisory at best -- it is
+   *    honoured on some clients and ignored on others. Requesting hd1080 is
+   *    the most that can be asked for; the player size, already full width
+   *    here, is what actually moves the needle.
+   *
+   * The player is not ready the moment the document fires load, so both are
+   * repeated a few times and then given up on. Failing to land costs nothing
+   * worse than captions staying visible or YouTube choosing its own quality.
    */
-  const turnOffCaptions = (frame: HTMLIFrameElement | null) => {
+  const configurePlayer = (frame: HTMLIFrameElement | null) => {
     if (provider !== 'youtube' || !frame) return
 
-    const send = () => {
+    const command = (func: string, args: unknown[]) => {
       const win = frame.contentWindow
       if (!win) return
-      for (const mod of ['captions', 'cc']) {
-        win.postMessage(
-          JSON.stringify({ event: 'command', func: 'unloadModule', args: [mod] }),
-          YT_ORIGIN,
-        )
-      }
+      win.postMessage(JSON.stringify({ event: 'command', func, args }), YT_ORIGIN)
+    }
+
+    const send = () => {
+      for (const mod of ['captions', 'cc']) command('unloadModule', [mod])
+      command('setPlaybackQuality', ['hd1080'])
     }
 
     send()
@@ -94,7 +105,7 @@ export function VideoEmbed({
           <iframe
             src={src}
             title={title}
-            onLoad={(e) => turnOffCaptions(e.currentTarget)}
+            onLoad={(e) => configurePlayer(e.currentTarget)}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             className="absolute inset-0 h-full w-full"

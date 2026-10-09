@@ -57,4 +57,15 @@ export const projects: Project[] = [
     href: 'https://www.youtube.com/watch?v=xbrxihwEQOI',
     linkLabel: 'Watch the full episode',
   },
+  {
+    title: 'BannerDeck',
+    meta: 'Broadcast-quality banners, built for modern livestreams',
+    blurb:
+      'I built BannerDeck to run the lower-third banners on our Launch Live Now shows. It is part web app, part HTML overlay: a producer drives it from a browser on one machine while OBS Studio pulls the overlay in as a browser source on another, so banners can be cued and animated live without intervention from the technical director running the stream. Animations, custom fonts, sizes and screen positions are all configurable, centered or off to one side, with a header and subheader or a single line, so it works for any show design.',
+    video: {
+      provider: 'youtube',
+      id: 'MDgH8vl3RfE',
+      title: 'BannerDeck, a browser-driven lower-third banner system for OBS Studio',
+    },
+  },
 ]
