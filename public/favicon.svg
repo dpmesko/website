@@ -1,4 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="16" fill="#14110E"/>
-  <text x="32" y="45" font-family="system-ui,sans-serif" font-size="36" font-weight="800" fill="#D8F24E" text-anchor="middle">D</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Monogram over a lower third: the D sits up top, the headline bar and its
+       shorter sub-bar occupy the literal lower third of the frame.
+
+       The D is drawn as a path rather than a <text> element, so it renders
+       identically everywhere instead of picking up whatever font the viewer's
+       OS happens to supply. Bowl radius is half the height, which is what lets
+       the curve meet the stem cleanly at any size.
+
+       Colours are the site's own: ink background, lime mark, coral sub-bar.
+       See src/content/themes.ts. -->
+  <rect width="100" height="100" rx="22" fill="#14110E"/>
+  <path fill-rule="evenodd" fill="#D8F24E"
+        d="M30 14h14a22 22 0 0 1 0 44H30ZM42 26h2a10 10 0 0 1 0 20H42Z"/>
+  <rect x="14" y="68" width="72" height="14" rx="4" fill="#D8F24E"/>
+  <rect x="14" y="86" width="42" height="9" rx="3" fill="#E14A2B"/>
 </svg>
