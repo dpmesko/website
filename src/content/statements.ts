@@ -22,5 +22,4 @@ export interface Statement {
 export const statements: Statement[] = [
   { word: 'I build', theme: 'ink' },
   { word: 'I stream', theme: 'coral' },
-  { word: 'I play', theme: 'cobalt' },
 ]
