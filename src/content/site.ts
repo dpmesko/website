@@ -14,9 +14,9 @@ export interface SiteConfig {
   heroLine: string
   email: string
   socials: Social[]
-  /** Used for <title> and link previews. */
+  /** Canonical origin. The <title> and meta tags themselves live in
+   *  index.html, which is what crawlers read. */
   siteUrl: string
-  metaDescription: string
 }
 
 export const site: SiteConfig = {
@@ -30,8 +30,6 @@ export const site: SiteConfig = {
   ],
 
   siteUrl: 'https://danmesko.com',
-  metaDescription:
-    'Dan Mesko -- software engineer and co-founder of Launch Live Now, building live stream programs for creators and enterprise.',
 }
 
 export const heroTheme: ThemeName = 'bone'
