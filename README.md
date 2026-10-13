@@ -106,12 +106,14 @@ for an `@font-face` rule.
 ## Deploying to your server
 
 ```bash
-./deploy/deploy.sh user@your-server.com:/var/www/website
+./deploy/deploy.sh dan-website:/var/www/website
 ```
 
-Builds and rsyncs `dist/` up. `deploy/nginx.conf` has a working server block
-with cache headers - copy the relevant parts into your real config and update
-the domain and cert paths.
+Builds locally and rsyncs `dist/` up; the server never sees the source, so
+commit before deploying to keep what is live traceable. `dan-website` is an SSH
+alias for the EC2 instance. `deploy/nginx.conf` mirrors the live config on the
+server - changes to it are not deployed automatically, so copy them over by
+hand and reload nginx.
 
 Because this is now a single page, the SPA fallback rule matters far less than
 it did: there's only one real URL. The config still includes it, which costs
