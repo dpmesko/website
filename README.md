@@ -2,12 +2,6 @@
 
 ## ⚠️ Before you go live - still to do
 
-- [ ] **`siteUrl`** in [src/content/site.ts](src/content/site.ts) is still
-      `https://example.com`. Set it to your real domain.
-- [ ] **`<title>` and meta description** in [index.html](index.html) are drafted
-      from your bio, not written by you. Read them once and make them sound like
-      you - they are what shows up in search results and when someone pastes
-      your link into Slack or iMessage.
 - [ ] **Projects** in [src/content/projects.ts](src/content/projects.ts) are
       still placeholders.
 

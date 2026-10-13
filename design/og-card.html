@@ -1,0 +1,61 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!--
+  Source for public/og.png, the 1200x630 link-preview image (og:image).
+
+  Colours, fonts and decor shapes are copied from the site: the palette from
+  src/content/themes.ts, the shapes from src/components/Decor.tsx, the monogram
+  from public/favicon.svg. Nothing here updates automatically, so re-render
+  after changing any of those.
+
+  Render from the repo root (any Chromium works; this is Playwright's):
+
+    ~/.cache/ms-playwright/chromium-*/chrome-linux/chrome --headless=old \
+      --hide-scrollbars --force-device-scale-factor=1 --window-size=1200,630 \
+      --virtual-time-budget=5000 --screenshot=public/og.png \
+      "file://$PWD/design/og-card.html"
+
+  --headless=old matters: the new headless mode crops the viewport and cuts off
+  the footer. Bump the filename (og-v2.png) when the image changes, or link
+  previews keep showing the cached one for days.
+-->
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Inter:opsz,wght@14..32,400;14..32,600&display=block" rel="stylesheet">
+<style>
+/* themes.bone */
+:root { --bg:#F2EFE6; --ink:#14110E; --accent:#E14A2B; --muted:#5C574E; }
+* { margin:0; box-sizing:border-box; }
+html, body { width:1200px; height:630px; overflow:hidden; }
+body { background:var(--bg); color:var(--ink); font-family:"Inter"; position:relative;
+       display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+.arc { position:absolute; right:-120px; bottom:-150px; width:460px; transform:rotate(-14deg); color:var(--accent); opacity:.15; }
+.sparkle { position:absolute; left:78px; top:70px; width:60px; color:var(--accent); }
+.role { font-weight:600; font-size:24px; letter-spacing:.25em; text-transform:uppercase; color:var(--accent); }
+h1 { font-family:"Bricolage Grotesque"; font-weight:800; font-size:196px; line-height:.85; letter-spacing:-.04em; margin-top:22px; }
+.line { display:flex; align-items:center; gap:22px; margin-top:38px; }
+.line svg { width:92px; color:var(--accent); flex:none; }
+.line p { font-size:34px; line-height:1.2; color:var(--muted); }
+.foot { position:absolute; bottom:44px; left:0; right:0; display:flex; justify-content:center; align-items:center; gap:14px; }
+.foot svg { width:40px; height:40px; }
+.foot span { font-weight:600; font-size:22px; letter-spacing:.02em; }
+</style></head>
+<body>
+  <svg class="arc" viewBox="0 0 200 100" fill="none"><path d="M0 100a100 100 0 01200 0" fill="currentColor"/></svg>
+  <svg class="sparkle" viewBox="0 0 100 100" fill="none"><path d="M50 0c4 27 19 42 46 46-27 4-42 19-46 46-4-27-19-42-46-46 27-4 42-19 46-46z" fill="currentColor"/></svg>
+
+  <p class="role">Software Engineer, Livestream Producer</p>
+  <h1>Dan Mesko</h1>
+  <div class="line">
+    <svg viewBox="0 0 240 40" fill="none"><path d="M2 20c20-24 40 24 60 0s40-24 60 0 40 24 60 0 40-24 56 0" stroke="currentColor" stroke-width="7" stroke-linecap="round"/></svg>
+    <p>I build software and use it to do cool things.</p>
+  </div>
+
+  <div class="foot">
+    <svg viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="#14110E"/>
+      <path fill-rule="evenodd" fill="#D8F24E" d="M30 14h14a22 22 0 0 1 0 44H30ZM42 26h2a10 10 0 0 1 0 20H42Z"/>
+      <rect x="14" y="68" width="72" height="14" rx="4" fill="#D8F24E"/>
+      <rect x="14" y="86" width="42" height="9" rx="3" fill="#E14A2B"/>
+    </svg>
+    <span>danmesko.com</span>
+  </div>
+</body></html>

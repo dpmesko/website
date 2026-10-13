@@ -29,8 +29,7 @@ export const site: SiteConfig = {
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/daniel-mesko-495a42156/' },
   ],
 
-  // TODO: still yours to fill in -- see the checklist at the top of README.md.
-  siteUrl: 'https://example.com',
+  siteUrl: 'https://danmesko.com',
   metaDescription:
     'Dan Mesko -- software engineer and co-founder of Launch Live Now, building live stream programs for creators and enterprise.',
 }
